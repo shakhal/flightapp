@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/baggage")
 public class BaggageController {
 
+    //NO CACHE HERE, SORRY :)
+
     private BaggageService baggageService;
 
     public BaggageController(BaggageService baggageService) {
