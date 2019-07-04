@@ -1,0 +1,27 @@
+buildscript {
+	ext.deps = [
+			lombockVersion       : "1.16.20",
+	]
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.flight'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '9'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compileOnly "org.projectlombok:lombok:${deps.lombockVersion}"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testCompile 'org.awaitility:awaitility-groovy:3.0.0'
+}
