@@ -1,7 +1,9 @@
 package com.flight.flightapp.baggage;
 
-import com.flight.flightapp.ticket.TicketService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/baggage")
 public class BaggageController {
 
-    private TicketService ticketService;
+    private BaggageService baggageService;
 
-    public BaggageController(TicketService ticketService) {
-        this.ticketService = ticketService;
+    public BaggageController(BaggageService baggageService) {
+        this.baggageService = baggageService;
     }
 
-//    @PostMapping("/{baggageId}/destination/{destinatioId}")
-//    public ResponseEntity checkingBaggage(@PathVariable String baggageId, @PathVariable String destinationId) {
-////        return ResponseEntity.ok(ticketService.isAvailable(ticketId));
-//    }
+    @PostMapping("/check")
+    public ResponseEntity checkingBaggage(@RequestBody BaggageCheckRequest baggageCheckRequest) {
+        return ResponseEntity.ok(BaggageCheckResponse.builder().success(
+                baggageService.checkIn(baggageCheckRequest.getDestinationId(), baggageCheckRequest.getBaggageId())
+        ).build());
+    }
 }
